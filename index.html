@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Jacob Pixton</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=Inconsolata:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f5f0;
+      --bg2: #f0ece5;
+      --ink: #222220;
+      --mid: #555550;
+      --light: #999990;
+      --faint: #ddddd8;
+      --rust: #b04020;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'Lora', Georgia, serif;
+      font-size: 16px;
+      line-height: 1.7;
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: var(--ink);
+      text-decoration: underline;
+      text-decoration-color: var(--faint);
+      text-underline-offset: 3px;
+      transition: text-decoration-color 0.2s, color 0.2s;
+    }
+    a:hover {
+      color: var(--rust);
+      text-decoration-color: var(--rust);
+    }
+
+    /* NAV */
+    nav {
+      padding: 2.2rem 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4rem;
+    }
+
+    .nav-name {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.8rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      text-decoration: none;
+      color: var(--ink);
+    }
+    .nav-name:hover { color: var(--ink); text-decoration-color: transparent; }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.6rem;
+    }
+
+    .nav-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.75rem;
+      font-weight: 300;
+      color: var(--light);
+      text-decoration: none;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* INTRO */
+    .intro {
+      margin-bottom: 3.5rem;
+    }
+
+    .intro h1 {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.35;
+      margin-bottom: 1.1rem;
+      letter-spacing: -0.01em;
+    }
+
+    .intro p {
+      font-size: 1rem;
+      color: var(--mid);
+      max-width: 560px;
+    }
+
+    .intro .meta {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.72rem;
+      font-weight: 300;
+      color: var(--light);
+      margin-top: 1.2rem;
+      letter-spacing: 0.02em;
+    }
+
+    /* SECTION */
+    .section-label {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.65rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 1.8rem;
+      display: block;
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid var(--faint);
+      margin: 3rem 0;
+    }
+
+    /* PROJECTS */
+    .project {
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--bg2);
+    }
+
+    .project:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .project-title {
+      font-size: 1.05rem;
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .project-title span {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.65rem;
+      font-weight: 300;
+      color: var(--light);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project p {
+      font-size: 0.94rem;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+      max-width: 600px;
+    }
+
+    .project p:last-of-type {
+      margin-bottom: 0.9rem;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .project-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      font-weight: 300;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: color 0.15s;
+    }
+    .project-links a:hover { color: var(--rust); }
+
+    .stack {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--faint);
+      letter-spacing: 0.02em;
+      margin-bottom: 0.8rem;
+    }
+
+    /* ABOUT */
+    .about p {
+      font-size: 0.94rem;
+      color: var(--mid);
+      margin-bottom: 0.9rem;
+      max-width: 600px;
+    }
+    .about p:last-child { margin-bottom: 0; }
+
+    /* FOOTER */
+    footer {
+      padding: 2.5rem 0 3rem;
+      border-top: 1px solid var(--faint);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 3rem;
+    }
+
+    footer p {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--light);
+      letter-spacing: 0.02em;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 1.4rem;
+    }
+
+    .footer-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.68rem;
+      font-weight: 300;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-links a:hover { color: var(--ink); }
+
+    @media (max-width: 500px) {
+      nav { margin-bottom: 2.5rem; }
+      .intro h1 { font-size: 1.25rem; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="/" class="nav-name">Jacob Pixton</a>
+    <ul class="nav-links">
+      <li><a href="#projects">projects</a></li>
+      <li><a href="#about">about</a></li>
+      <li><a href="https://github.com/ImYellingTibbers" target="_blank">github</a></li>
+    </ul>
+  </nav>
+
+  <div class="intro">
+    <h1>Hi, I'm Jacob. I build software and automation tools.</h1>
+    <p>
+      I got into coding a few years ago and found I was pretty good at it. Most of what I build solves a specific problem I ran into and couldn't ignore.
+    </p>
+    <p class="meta">Lehi, Utah &nbsp;·&nbsp; Python, JavaScript, React, AI pipelines</p>
+  </div>
+
+  <hr />
+
+  <section id="projects">
+    <span class="section-label">Projects</span>
+
+    <div class="project">
+      <div class="project-title">
+        Project S
+        <span>AI / Automation</span>
+      </div>
+      <p class="stack">Python · Gemma 3 27B · Llama 3.3 70B · Qwen3-TTS · Stable Diffusion XL · FFmpeg · OpenRouter</p>
+      <p>
+        I run four YouTube channels in the horror niche. After a while the manual production process got to be a lot, so I built a pipeline to handle it overnight. One command kicks it off and by morning there's a finished, upload-ready video sitting in the output folder.
+      </p>
+      <p>
+        The pipeline generates the script using a couple of different LLMs (I use Gemma 3 27B for the main writing and Llama 3.3 70B via OpenRouter for iteration), synthesizes narration audio locally on my GPU using Qwen3-TTS, generates imagery through Stable Diffusion XL running in ComfyUI, and assembles everything into a video with FFmpeg using NVENC hardware encoding. The part that took the most work was the script quality loop: it evaluates drafts against a rubric and reruns until it hits a threshold, so the outputs don't feel robotic.
+      </p>
+      <div class="project-links">
+        <a href="https://github.com/ImYellingTibbers" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-title">
+        Battery Retrofit Proposal Tool
+        <span>Internal Tool</span>
+      </div>
+      <p class="stack">Python · ReportLab · PyPDF2 · openpyxl · Excel / VBA</p>
+      <p>
+        At my previous job, sales reps selling battery add-ons to existing solar customers had to submit a request to a back-office team and wait for someone to manually put together a proposal PDF. It could take hours, and by the time the proposal arrived the customer had often moved on.
+      </p>
+      <p>
+        I built a tool to fix that. The rep opens an Excel workbook, fills in five fields, picks the battery product and financing type, and clicks a button. Python reads the calculated pricing and loan outputs from the workbook via openpyxl, overlays all the customer information onto a branded PDF template using ReportLab, and writes a finished proposal to the output folder. The whole process takes a few seconds. Financial logic stays in Excel where the finance team can update it without touching any code.
+      </p>
+      <div class="project-links">
+        <a href="https://github.com/ImYellingTibbers" target="_blank">View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <div class="project-title">
+        Spots
+        <span>Web App</span>
+      </div>
+      <p class="stack">JavaScript · Webpack 5 · PostCSS · Babel · GitHub Pages</p>
+      <p>
+        A photo sharing web app I built during a bootcamp. It has a profile page, a responsive card grid, and modal forms for editing your profile and adding new posts. I set it up with a proper build pipeline rather than just linking files directly: Webpack 5 for bundling, PostCSS with autoprefixer and minification, Babel with core-js polyfills, and a one-command deploy to GitHub Pages.
+      </p>
+      <div class="project-links">
+        <a href="https://imyellingtibbers.github.io/se_project_spots/" target="_blank">Live site</a>
+        <a href="https://github.com/ImYellingTibbers/se_project_spots" target="_blank">GitHub</a>
+      </div>
+    </div>
+
+  </section>
+
+  <hr />
+
+  <section id="about" class="about">
+    <span class="section-label">About</span>
+    <p>
+      My background is in entrepreneurship. Before I was writing code I was running a company, which I eventually sold. That experience shapes how I think about software: I care a lot about whether something actually gets used and whether it solves the real problem.
+    </p>
+    <p>
+      I picked up coding seriously a few years ago and have been building things with it ever since. I tend to learn best when there's something specific I want to make, which is probably why most of my projects started as personal frustrations.
+    </p>
+    <p>
+      Outside of work I tend to stay busy building things just to see if I can. Right now that includes an automated horror story YouTube channel, my first indie game, and a nutrition app that connects recipes to grocery shopping. I like learning by doing.
+    </p>
+    <p>
+      If you want to learn more or just reach out, I'd love to hear from you.
+    </p>
+    <p>
+      <a href="mailto:jcpixton@gmail.com">jcpixton@gmail.com</a><br />
+      720-263-4334 (text first if you don't mind, I get a lot of spam calls)
+    </p>
+  </section>
+
+  <footer>
+    <p>Jacob Pixton · Lehi, UT</p>
+    <div class="footer-links">
+      <a href="https://github.com/ImYellingTibbers" target="_blank">GitHub</a>
+      <a href="https://www.linkedin.com/in/jacobpixton" target="_blank">LinkedIn</a>
+      <a href="mailto:your@email.com">Email</a>
+    </div>
+  </footer>
+
+</body>
+</html>

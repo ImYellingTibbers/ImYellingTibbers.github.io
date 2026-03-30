@@ -11,14 +11,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f8f5f0;
-      --bg2: #f0ece5;
-      --ink: #222220;
-      --mid: #555550;
-      --light: #999990;
-      --faint: #ddddd8;
-      --rust: #b04020;
+      --bg:       #f7f3ee;
+      --bg2:      #ede8e0;
+      --ink:      #1e1e1c;
+      --mid:      #52524d;
+      --light:    #9a9a92;
+      --faint:    #d8d4cc;
+      --rust:     #ad3e1c;
+      --card-bg:  #ffffff;
+      --card-shadow: 0 1px 4px rgba(0,0,0,0.06), 0 4px 20px rgba(0,0,0,0.05);
     }
+
+    html { scroll-behavior: smooth; }
 
     body {
       background: var(--bg);
@@ -26,9 +30,6 @@
       font-family: 'Lora', Georgia, serif;
       font-size: 16px;
       line-height: 1.7;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
       -webkit-font-smoothing: antialiased;
     }
 
@@ -37,25 +38,30 @@
       text-decoration: underline;
       text-decoration-color: var(--faint);
       text-underline-offset: 3px;
-      transition: text-decoration-color 0.2s, color 0.2s;
+      transition: color 0.15s, text-decoration-color 0.15s;
     }
     a:hover {
       color: var(--rust);
       text-decoration-color: var(--rust);
     }
 
-    /* NAV */
+    /* ── NAV ── */
     nav {
-      padding: 2.2rem 0 0;
+      position: sticky;
+      top: 0;
+      background: rgba(247, 243, 238, 0.92);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--faint);
+      padding: 1.1rem 2.5rem;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 4rem;
+      align-items: center;
+      z-index: 50;
     }
 
     .nav-name {
       font-family: 'Inconsolata', monospace;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 400;
       letter-spacing: 0.02em;
       text-decoration: none;
@@ -66,7 +72,7 @@
     .nav-links {
       list-style: none;
       display: flex;
-      gap: 1.6rem;
+      gap: 1.8rem;
     }
 
     .nav-links a {
@@ -75,147 +81,237 @@
       font-weight: 300;
       color: var(--light);
       text-decoration: none;
+      transition: color 0.15s;
     }
     .nav-links a:hover { color: var(--ink); }
 
-    /* INTRO */
-    .intro {
-      margin-bottom: 3.5rem;
+    /* ── PAGE WRAPPER ── */
+    .page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 2rem;
     }
 
-    .intro h1 {
-      font-size: 1.5rem;
+    /* ── HERO ── */
+    .hero {
+      padding: 6rem 0 5rem;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
       font-weight: 500;
-      line-height: 1.35;
-      margin-bottom: 1.1rem;
-      letter-spacing: -0.01em;
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.4rem;
+      max-width: 640px;
     }
 
-    .intro p {
-      font-size: 1rem;
+    .hero p {
+      font-size: 1.05rem;
       color: var(--mid);
-      max-width: 560px;
+      max-width: 520px;
+      margin-bottom: 0.8rem;
     }
 
-    .intro .meta {
+    .hero-meta {
       font-family: 'Inconsolata', monospace;
       font-size: 0.72rem;
       font-weight: 300;
       color: var(--light);
-      margin-top: 1.2rem;
-      letter-spacing: 0.02em;
+      margin-top: 1.4rem;
+      letter-spacing: 0.03em;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem 1.2rem;
     }
 
-    /* SECTION */
+    .hero-meta span::before {
+      content: '·';
+      margin-right: 1.2rem;
+      color: var(--faint);
+    }
+    .hero-meta span:first-child::before { content: ''; margin-right: 0; }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding: 4.5rem 0;
+      border-bottom: 1px solid var(--faint);
+    }
+
+    .section:last-child { border-bottom: none; }
+
     .section-label {
       font-family: 'Inconsolata', monospace;
-      font-size: 0.65rem;
+      font-size: 0.62rem;
       font-weight: 400;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--light);
-      margin-bottom: 1.8rem;
+      margin-bottom: 2.5rem;
       display: block;
     }
 
-    hr {
-      border: none;
-      border-top: 1px solid var(--faint);
-      margin: 3rem 0;
+    /* ── PROJECT CARDS ── */
+    .projects {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
     }
 
-    /* PROJECTS */
-    .project {
-      margin-bottom: 3rem;
-      padding-bottom: 3rem;
-      border-bottom: 1px solid var(--bg2);
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--faint);
+      border-radius: 6px;
+      padding: 2rem 2.2rem 2rem;
+      box-shadow: var(--card-shadow);
+      transition: box-shadow 0.2s, border-color 0.2s;
     }
 
-    .project:last-child {
-      border-bottom: none;
-      padding-bottom: 0;
-      margin-bottom: 0;
+    .card:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 32px rgba(0,0,0,0.07);
+      border-color: #c8c4bb;
     }
 
-    .project-title {
-      font-size: 1.05rem;
-      font-weight: 500;
-      margin-bottom: 0.25rem;
+    .card-header {
       display: flex;
       align-items: baseline;
+      justify-content: space-between;
       gap: 1rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.3rem;
+    }
+
+    .card-title {
+      font-size: 1.08rem;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+    }
+
+    .card-type {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.62rem;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--light);
+      white-space: nowrap;
+    }
+
+    .card-stack {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.67rem;
+      font-weight: 300;
+      color: var(--faint);
+      letter-spacing: 0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .card p {
+      font-size: 0.92rem;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+      max-width: 660px;
+    }
+
+    .card p:last-of-type { margin-bottom: 1.1rem; }
+
+    .card-links {
+      display: flex;
+      gap: 1.2rem;
       flex-wrap: wrap;
     }
 
-    .project-title span {
+    .card-links a {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--light);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      border: 1px solid var(--faint);
+      border-radius: 3px;
+      padding: 0.28rem 0.7rem;
+      transition: color 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .card-links a:hover {
+      color: var(--rust);
+      border-color: var(--rust);
+      background: rgba(173, 62, 28, 0.04);
+    }
+
+    .card-links a.primary {
+      background: var(--ink);
+      color: var(--bg);
+      border-color: var(--ink);
+    }
+
+    .card-links a.primary:hover {
+      background: var(--rust);
+      border-color: var(--rust);
+      color: #fff;
+    }
+
+    /* ── ABOUT ── */
+    .about p {
+      font-size: 0.95rem;
+      color: var(--mid);
+      max-width: 600px;
+      margin-bottom: 1rem;
+    }
+    .about p:last-child { margin-bottom: 0; }
+
+    .contact-block {
+      margin-top: 2rem;
+      padding: 1.4rem 1.6rem;
+      background: var(--card-bg);
+      border: 1px solid var(--faint);
+      border-radius: 6px;
+      box-shadow: var(--card-shadow);
+      max-width: 360px;
+    }
+
+    .contact-block p {
+      font-size: 0.88rem;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+    }
+
+    .contact-block .contact-line {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 0.35rem;
+      display: block;
+    }
+
+    .contact-block .contact-note {
       font-family: 'Inconsolata', monospace;
       font-size: 0.65rem;
       font-weight: 300;
       color: var(--light);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
+      margin-top: 0.5rem;
+      display: block;
+      margin-bottom: 0;
     }
 
-    .project p {
-      font-size: 0.94rem;
-      color: var(--mid);
-      margin-bottom: 0.75rem;
-      max-width: 600px;
-    }
-
-    .project p:last-of-type {
-      margin-bottom: 0.9rem;
-    }
-
-    .project-links {
-      display: flex;
-      gap: 1.2rem;
-    }
-
-    .project-links a {
-      font-family: 'Inconsolata', monospace;
-      font-size: 0.7rem;
-      font-weight: 300;
-      color: var(--light);
-      text-decoration: none;
-      letter-spacing: 0.03em;
-      transition: color 0.15s;
-    }
-    .project-links a:hover { color: var(--rust); }
-
-    .stack {
-      font-family: 'Inconsolata', monospace;
-      font-size: 0.68rem;
-      font-weight: 300;
-      color: var(--faint);
-      letter-spacing: 0.02em;
-      margin-bottom: 0.8rem;
-    }
-
-    /* ABOUT */
-    .about p {
-      font-size: 0.94rem;
-      color: var(--mid);
-      margin-bottom: 0.9rem;
-      max-width: 600px;
-    }
-    .about p:last-child { margin-bottom: 0; }
-
-    /* FOOTER */
+    /* ── FOOTER ── */
     footer {
-      padding: 2.5rem 0 3rem;
+      background: var(--bg2);
       border-top: 1px solid var(--faint);
+      padding: 1.8rem 2.5rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 3rem;
+      gap: 0.8rem;
     }
 
     footer p {
       font-family: 'Inconsolata', monospace;
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       font-weight: 300;
       color: var(--light);
       letter-spacing: 0.02em;
@@ -228,7 +324,7 @@
 
     .footer-links a {
       font-family: 'Inconsolata', monospace;
-      font-size: 0.68rem;
+      font-size: 0.67rem;
       font-weight: 300;
       color: var(--light);
       text-decoration: none;
@@ -236,17 +332,33 @@
     }
     .footer-links a:hover { color: var(--ink); }
 
-    @media (max-width: 500px) {
-      nav { margin-bottom: 2.5rem; }
-      .intro h1 { font-size: 1.25rem; }
-      footer { flex-direction: column; align-items: flex-start; }
+    /* ── FADE IN ── */
+    .fade {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade.in {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 560px) {
+      nav { padding: 1rem 1.2rem; }
+      .page { padding: 0 1.2rem; }
+      .hero { padding: 3.5rem 0 3rem; }
+      .hero h1 { font-size: 1.6rem; }
+      .section { padding: 3rem 0; }
+      .card { padding: 1.5rem 1.4rem; }
+      footer { padding: 1.5rem 1.2rem; flex-direction: column; align-items: flex-start; }
     }
   </style>
 </head>
 <body>
 
   <nav>
-    <a href="/" class="nav-name">Jacob Pixton</a>
+    <a href="#" class="nav-name">Jacob Pixton</a>
     <ul class="nav-links">
       <li><a href="#projects">projects</a></li>
       <li><a href="#about">about</a></li>
@@ -254,100 +366,127 @@
     </ul>
   </nav>
 
-  <div class="intro">
-    <h1>Hi, I'm Jacob. I build software and automation tools.</h1>
-    <p>
-      I got into coding a few years ago and found I was pretty good at it. Most of what I build solves a specific problem I ran into and couldn't ignore.
-    </p>
-    <p class="meta">Lehi, Utah &nbsp;·&nbsp; Python, JavaScript, React, AI pipelines</p>
+  <div class="page">
+
+    <!-- HERO -->
+    <div class="hero">
+      <h1>Hi, I'm Jacob. I build software and automation tools.</h1>
+      <p>
+        I got into coding a few years ago and found I was pretty good at it. Most of what I build solves a specific problem I ran into and couldn't ignore.
+      </p>
+      <div class="hero-meta">
+        <span>Lehi, Utah</span>
+        <span>Python</span>
+        <span>JavaScript</span>
+        <span>React</span>
+        <span>AI pipelines</span>
+      </div>
+    </div>
+
+    <!-- PROJECTS -->
+    <section class="section" id="projects">
+      <span class="section-label">Projects</span>
+
+      <div class="projects">
+
+        <div class="card fade">
+          <div class="card-header">
+            <span class="card-title">Project S</span>
+            <span class="card-type">AI / Automation</span>
+          </div>
+          <p class="card-stack">Python · Gemma 3 27B · Llama 3.3 70B · Qwen3-TTS · Stable Diffusion XL · FFmpeg · OpenRouter</p>
+          <p>
+            I run four YouTube channels in the horror niche. After a while the manual production process got to be a lot, so I built a pipeline to handle it overnight. One command kicks it off and by morning there's a finished, upload-ready video sitting in the output folder.
+          </p>
+          <p>
+            The pipeline generates the script using a couple of different LLMs, synthesizes narration audio locally on my GPU using Qwen3-TTS, generates imagery through Stable Diffusion XL running in ComfyUI, and assembles everything into a video with FFmpeg using NVENC hardware encoding. The part that took the most work was the script quality loop: it evaluates drafts against a rubric and reruns until it hits a threshold, so the outputs don't feel robotic.
+          </p>
+          <div class="card-links">
+            <a href="https://github.com/ImYellingTibbers/Project_S" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="card fade">
+          <div class="card-header">
+            <span class="card-title">Battery Retrofit Proposal Tool</span>
+            <span class="card-type">Internal Tool</span>
+          </div>
+          <p class="card-stack">Python · ReportLab · PyPDF2 · openpyxl · Excel / VBA</p>
+          <p>
+            At my previous job, sales reps selling battery add-ons to existing solar customers had to submit a request to a back-office team and wait for someone to manually put together a proposal PDF. It could take hours, and by the time the proposal arrived the customer had often moved on.
+          </p>
+          <p>
+            I built a tool to fix that. The rep opens an Excel workbook, fills in five fields, picks the battery product and financing type, and clicks a button. Python reads the calculated pricing and loan outputs from the workbook via openpyxl, overlays all the customer information onto a branded PDF template using ReportLab, and writes a finished proposal to the output folder. The whole process takes a few seconds. Financial logic stays in Excel where the finance team can update it without touching any code.
+          </p>
+          <div class="card-links">
+            <a href="https://github.com/ImYellingTibbers/Proposal_Tool" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+        <div class="card fade">
+          <div class="card-header">
+            <span class="card-title">Spots</span>
+            <span class="card-type">Web App</span>
+          </div>
+          <p class="card-stack">JavaScript · Webpack 5 · PostCSS · Babel · GitHub Pages</p>
+          <p>
+            A photo sharing web app I built during a bootcamp. It has a profile page, a responsive card grid, and modal forms for editing your profile and adding new posts. I set it up with a proper build pipeline rather than just linking files directly: Webpack 5 for bundling, PostCSS with autoprefixer and minification, Babel with core-js polyfills, and a one-command deploy to GitHub Pages.
+          </p>
+          <div class="card-links">
+            <a class="primary" href="https://imyellingtibbers.github.io/se_project_spots/" target="_blank">Live site</a>
+            <a href="https://github.com/ImYellingTibbers/se_project_spots" target="_blank">GitHub</a>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <span class="section-label">About</span>
+      <div class="about">
+        <p>
+          My background is in entrepreneurship. Before I was writing code I was running a company, which I eventually sold. That experience shapes how I think about software: I care a lot about whether something actually gets used and whether it solves the real problem.
+        </p>
+        <p>
+          I picked up coding seriously a few years ago and have been building things with it ever since. I tend to learn best when there's something specific I want to make, which is probably why most of my projects started as personal frustrations.
+        </p>
+        <p>
+          Outside of work I tend to stay busy building things just to see if I can. Right now that includes an automated horror story YouTube channel, my first indie game, and a nutrition app that connects recipes to grocery shopping. I like learning by doing.
+        </p>
+        <p>
+          If you want to learn more or just reach out, I'd love to hear from you.
+        </p>
+
+        <div class="contact-block">
+          <a class="contact-line" href="mailto:jcpixton@gmail.com">jcpixton@gmail.com</a>
+          <a class="contact-line" href="tel:+17202634334">720-263-4334</a>
+          <span class="contact-note">Text first if you don't mind, I get a lot of spam calls.</span>
+        </div>
+
+      </div>
+    </section>
+
   </div>
 
-  <hr />
-
-  <section id="projects">
-    <span class="section-label">Projects</span>
-
-    <div class="project">
-      <div class="project-title">
-        Project S
-        <span>AI / Automation</span>
-      </div>
-      <p class="stack">Python · Gemma 3 27B · Llama 3.3 70B · Qwen3-TTS · Stable Diffusion XL · FFmpeg · OpenRouter</p>
-      <p>
-        I run four YouTube channels in the horror niche. After a while the manual production process got to be a lot, so I built a pipeline to handle it overnight. One command kicks it off and by morning there's a finished, upload-ready video sitting in the output folder.
-      </p>
-      <p>
-        The pipeline generates the script using a couple of different LLMs (I use Gemma 3 27B for the main writing and Llama 3.3 70B via OpenRouter for iteration), synthesizes narration audio locally on my GPU using Qwen3-TTS, generates imagery through Stable Diffusion XL running in ComfyUI, and assembles everything into a video with FFmpeg using NVENC hardware encoding. The part that took the most work was the script quality loop: it evaluates drafts against a rubric and reruns until it hits a threshold, so the outputs don't feel robotic.
-      </p>
-      <div class="project-links">
-        <a href="https://github.com/ImYellingTibbers" target="_blank">View on GitHub</a>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-title">
-        Battery Retrofit Proposal Tool
-        <span>Internal Tool</span>
-      </div>
-      <p class="stack">Python · ReportLab · PyPDF2 · openpyxl · Excel / VBA</p>
-      <p>
-        At my previous job, sales reps selling battery add-ons to existing solar customers had to submit a request to a back-office team and wait for someone to manually put together a proposal PDF. It could take hours, and by the time the proposal arrived the customer had often moved on.
-      </p>
-      <p>
-        I built a tool to fix that. The rep opens an Excel workbook, fills in five fields, picks the battery product and financing type, and clicks a button. Python reads the calculated pricing and loan outputs from the workbook via openpyxl, overlays all the customer information onto a branded PDF template using ReportLab, and writes a finished proposal to the output folder. The whole process takes a few seconds. Financial logic stays in Excel where the finance team can update it without touching any code.
-      </p>
-      <div class="project-links">
-        <a href="https://github.com/ImYellingTibbers" target="_blank">View on GitHub</a>
-      </div>
-    </div>
-
-    <div class="project">
-      <div class="project-title">
-        Spots
-        <span>Web App</span>
-      </div>
-      <p class="stack">JavaScript · Webpack 5 · PostCSS · Babel · GitHub Pages</p>
-      <p>
-        A photo sharing web app I built during a bootcamp. It has a profile page, a responsive card grid, and modal forms for editing your profile and adding new posts. I set it up with a proper build pipeline rather than just linking files directly: Webpack 5 for bundling, PostCSS with autoprefixer and minification, Babel with core-js polyfills, and a one-command deploy to GitHub Pages.
-      </p>
-      <div class="project-links">
-        <a href="https://imyellingtibbers.github.io/se_project_spots/" target="_blank">Live site</a>
-        <a href="https://github.com/ImYellingTibbers/se_project_spots" target="_blank">GitHub</a>
-      </div>
-    </div>
-
-  </section>
-
-  <hr />
-
-  <section id="about" class="about">
-    <span class="section-label">About</span>
-    <p>
-      My background is in entrepreneurship. Before I was writing code I was running a company, which I eventually sold. That experience shapes how I think about software: I care a lot about whether something actually gets used and whether it solves the real problem.
-    </p>
-    <p>
-      I picked up coding seriously a few years ago and have been building things with it ever since. I tend to learn best when there's something specific I want to make, which is probably why most of my projects started as personal frustrations.
-    </p>
-    <p>
-      Outside of work I tend to stay busy building things just to see if I can. Right now that includes an automated horror story YouTube channel, my first indie game, and a nutrition app that connects recipes to grocery shopping. I like learning by doing.
-    </p>
-    <p>
-      If you want to learn more or just reach out, I'd love to hear from you.
-    </p>
-    <p>
-      <a href="mailto:jcpixton@gmail.com">jcpixton@gmail.com</a><br />
-      720-263-4334 (text first if you don't mind, I get a lot of spam calls)
-    </p>
-  </section>
-
   <footer>
-    <p>Jacob Pixton · Lehi, UT</p>
+    <p>Jacob Pixton · Lehi, UT · 2026</p>
     <div class="footer-links">
       <a href="https://github.com/ImYellingTibbers" target="_blank">GitHub</a>
       <a href="https://www.linkedin.com/in/jacobpixton" target="_blank">LinkedIn</a>
-      <a href="mailto:your@email.com">Email</a>
+      <a href="mailto:jcpixton@gmail.com">Email</a>
     </div>
   </footer>
+
+  <script>
+    const fades = document.querySelectorAll('.fade');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.08 });
+    fades.forEach(el => io.observe(el));
+  </script>
 
 </body>
 </html>

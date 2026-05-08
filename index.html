@@ -253,6 +253,25 @@
       color: #fff;
     }
 
+    .card-status {
+      font-family: 'Inconsolata', monospace;
+      font-size: 0.7rem;
+      font-weight: 400;
+      color: var(--mid);
+      letter-spacing: 0.04em;
+      border: 1px solid var(--faint);
+      border-radius: 3px;
+      padding: 0.28rem 0.7rem;
+      display: inline-block;
+      background: var(--bg);
+    }
+    .card-status.active::before {
+      content: '●';
+      color: var(--rust);
+      margin-right: 0.4rem;
+      font-size: 0.7em;
+    }
+
     /* ── ABOUT ── */
     .about p {
       font-size: 0.95rem;
@@ -370,16 +389,17 @@
 
     <!-- HERO -->
     <div class="hero">
-      <h1>Hi, I'm Jacob. I build software and automation tools.</h1>
+      <h1>Hi, I'm Jacob. I build AI systems and software automation.</h1>
       <p>
-        I got into coding a few years ago and found I was pretty good at it. Most of what I build solves a specific problem I ran into and couldn't ignore.
+        I got into coding a few years ago and found I was pretty good at it. Most of what I build now involves LLMs, agents, and the kind of plumbing that turns a cool idea into something that actually runs on its own.
       </p>
       <div class="hero-meta">
         <span>Lehi, Utah</span>
         <span>Python</span>
-        <span>JavaScript</span>
-        <span>React</span>
-        <span>AI pipelines</span>
+        <span>FastAPI</span>
+        <span>Docker</span>
+        <span>Multi-agent systems</span>
+        <span>Local GPU inference</span>
       </div>
     </div>
 
@@ -388,6 +408,26 @@
       <span class="section-label">Projects</span>
 
       <div class="projects">
+
+        <div class="card fade">
+          <div class="card-header">
+            <span class="card-title">Mark — Multi-Agent Marketing Automation</span>
+            <span class="card-type">AI Agents · 2026</span>
+          </div>
+          <p class="card-stack">OpenClaw · Docker · OpenRouter · Claude · DeepSeek · Tailscale · systemd · Telegram</p>
+          <p>
+            Mark is a two-agent marketing system that runs autonomously on a dedicated Ubuntu server, handling the work that would otherwise need a full-time marketer across a portfolio of consumer apps. He wakes up, does research, writes copy, drafts content, and stops to ask for approval through Telegram before anything goes live.
+          </p>
+          <p>
+            The architecture is intentionally minimal. A working manager agent on a low-cost model (DeepSeek V4 Flash) handles orchestration, research, copywriting, and analytics. A separate strategist agent on a stronger model (Sonnet 4.6) produces the launch brief at the start and only reruns when there's real evidence the strategy isn't working. Everything else is a skill, not an agent. That cost-routing decision alone reduces token spend by roughly an order of magnitude versus running everything on a single frontier model.
+          </p>
+          <p>
+            I built the operational layer myself: agent identity files, marketing-research and copy-production skills, container orchestration with docker-compose, the Telegram approval gate, Tailscale for private networking, and systemd so the whole thing boots and recovers on its own.
+          </p>
+          <div class="card-links">
+            <span class="card-status active">Active · private repo</span>
+          </div>
+        </div>
 
         <div class="card fade">
           <div class="card-header">
@@ -408,6 +448,23 @@
 
         <div class="card fade">
           <div class="card-header">
+            <span class="card-title">DealRadar — Agentic Restaurant Deal Finder</span>
+            <span class="card-type">AI / Full-Stack · 2026</span>
+          </div>
+          <p class="card-stack">FastAPI · React · Server-Sent Events · Google Places · DeepSeek V3 · OpenRouter</p>
+          <p>
+            DealRadar finds restaurant deals near a zip code. The interesting part is how it decides where to look. The backend uses tool calling so the LLM can choose between hitting Google Places for restaurant discovery or pulling from a local chain playbook I built — a JSON database of pre-built deal extraction instructions for around eighty major chains. The agent evaluates the user query, picks the right tool, and the FastAPI backend orchestrates the calls and streams results back to the React frontend over SSE as they come in.
+          </p>
+          <p>
+            The hardest problem ended up being cost. Early on, every restaurant lookup hit the LLM, which killed the unit economics. The chain playbook system fixed that by skipping the model entirely for known restaurants — chains resolve in milliseconds, and only independents need an actual scrape and extraction pass. That one decision turned a fun demo into something that could actually run as a product.
+          </p>
+          <div class="card-links">
+            <span class="card-status active">In development · private repo</span>
+          </div>
+        </div>
+
+        <div class="card fade">
+          <div class="card-header">
             <span class="card-title">Battery Retrofit Proposal Tool</span>
             <span class="card-type">Internal Tool</span>
           </div>
@@ -423,19 +480,10 @@
           </div>
         </div>
 
-        <div class="card fade">
-          <div class="card-header">
-            <span class="card-title">Spots</span>
-            <span class="card-type">Web App</span>
-          </div>
-          <p class="card-stack">JavaScript · Webpack 5 · PostCSS · Babel · GitHub Pages</p>
-          <p>
-            A photo sharing web app I built during a bootcamp. It has a profile page, a responsive card grid, and modal forms for editing your profile and adding new posts. I set it up with a proper build pipeline rather than just linking files directly: Webpack 5 for bundling, PostCSS with autoprefixer and minification, Babel with core-js polyfills, and a one-command deploy to GitHub Pages.
+        <div class="card fade" style="background: transparent; box-shadow: none; border: none; border-top: 1px solid var(--faint); border-radius: 0; padding: 1.6rem 0 0;">
+          <p style="font-style: italic; max-width: 660px; color: var(--mid);">
+            <strong style="font-style: normal; color: var(--ink); font-weight: 500;">Also building:</strong> Confyde, an iOS journaling app currently in App Store review. Skillet, a multi-agent skill factory that publishes to the OpenClaw skills marketplace. A handful of smaller things in earlier stages — happy to talk about any of it.
           </p>
-          <div class="card-links">
-            <a class="primary" href="https://imyellingtibbers.github.io/se_project_spots/" target="_blank">Live site</a>
-            <a href="https://github.com/ImYellingTibbers/se_project_spots" target="_blank">GitHub</a>
-          </div>
         </div>
 
       </div>
@@ -452,7 +500,7 @@
           I picked up coding seriously a few years ago and have been building things with it ever since. I tend to learn best when there's something specific I want to make, which is probably why most of my projects started as personal frustrations.
         </p>
         <p>
-          Outside of work I tend to stay busy building things just to see if I can. Right now that includes an automated horror story YouTube channel, my first indie game, and a nutrition app that connects recipes to grocery shopping. I like learning by doing.
+          Outside of the projects above I tend to stay busy building things just to see if I can. Right now that includes the four horror narration channels Project S quietly runs in the background, a small Godot arcade game I shipped on itch.io, and a slow-burn horror game with a couple of antagonists I've had in my head for too long. I like learning by doing.
         </p>
         <p>
           If you want to learn more or just reach out, I'd love to hear from you.

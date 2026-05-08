@@ -436,10 +436,10 @@
           </div>
           <p class="card-stack">Python · Gemma 3 27B · Llama 3.3 70B · Qwen3-TTS · Stable Diffusion XL · FFmpeg · OpenRouter</p>
           <p>
-            I run four YouTube channels in the horror niche. After a while the manual production process got to be a lot, so I built a pipeline to handle it overnight. One command kicks it off and by morning there's a finished, upload-ready video sitting in the output folder.
+            Project S is an end-to-end content generation pipeline that runs from a single command. One trigger kicks off scriptwriting, narration, imagery, and video assembly in sequence, and by morning a finished, fully-rendered video sits in the output folder.
           </p>
           <p>
-            The pipeline generates the script using a couple of different LLMs, synthesizes narration audio locally on my GPU using Qwen3-TTS, generates imagery through Stable Diffusion XL running in ComfyUI, and assembles everything into a video with FFmpeg using NVENC hardware encoding. The part that took the most work was the script quality loop: it evaluates drafts against a rubric and reruns until it hits a threshold, so the outputs don't feel robotic.
+            The pipeline routes script generation across two LLMs through OpenRouter, synthesizes narration audio locally on my GPU using Qwen3-TTS, generates imagery through Stable Diffusion XL running in ComfyUI, and assembles the final video with FFmpeg using NVENC hardware encoding. The part that took the most work was the script quality loop: it evaluates drafts against a rubric and reruns until it hits a threshold, so the outputs don't feel templated. Most of the engineering ended up in places I didn't expect — VRAM contention between SDXL and the local LLM stage, FFmpeg's concat bug with AAC audio, banned-phrase detection that I eventually pulled out of the prompt and into Python because the model wouldn't reliably listen.
           </p>
           <div class="card-links">
             <a href="https://github.com/ImYellingTibbers/Project_S" target="_blank">GitHub</a>
@@ -453,7 +453,7 @@
           </div>
           <p class="card-stack">FastAPI · React · Server-Sent Events · Google Places · DeepSeek V3 · OpenRouter</p>
           <p>
-            DealRadar finds restaurant deals near a zip code. The interesting part is how it decides where to look. The backend uses tool calling so the LLM can choose between hitting Google Places for restaurant discovery or pulling from a local chain playbook I built — a JSON database of pre-built deal extraction instructions for around eighty major chains. The agent evaluates the user query, picks the right tool, and the FastAPI backend orchestrates the calls and streams results back to the React frontend over SSE as they come in.
+            DealRadar finds restaurant deals near a zip code. The interesting part is how it decides where to look. The backend uses LLM tool calling so the model can choose between hitting Google Places for restaurant discovery, pulling from a local chain playbook I built, or kicking off a scrape and extraction pass for unknown restaurants. The chain playbook is a JSON database of pre-built deal extraction instructions for around eighty major chains. The FastAPI backend orchestrates the calls based on the model's choice and streams results back to the React frontend over SSE as they come in.
           </p>
           <p>
             The hardest problem ended up being cost. Early on, every restaurant lookup hit the LLM, which killed the unit economics. The chain playbook system fixed that by skipping the model entirely for known restaurants — chains resolve in milliseconds, and only independents need an actual scrape and extraction pass. That one decision turned a fun demo into something that could actually run as a product.
